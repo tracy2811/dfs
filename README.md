@@ -9,7 +9,7 @@ Semester: <b>F20</b><br>
 
 <h2>Architectural diagrams</h2>
 
-![diagram_1](https://user-images.githubusercontent.com/22301825/95024049-f9b68100-0680-11eb-9ca8-bfb6dcc6ced2.JPG)
+![Screenshot](diagrams/diagram_1.jpg)
 
 <h2>Description of communication protocols</h2>
 
