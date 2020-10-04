@@ -18,4 +18,15 @@ Semester: <b>F20</b><br>
 
 <h4>Trang Nguyen (BS18-DS-01):</h4>
 
+<ul>
+  <li>Coding</li>
+</ul>
+
+
 <h4>Marko Pezer (BS18-SE-01):</h4>
+
+<ul>
+  <li>Documentation</li>
+  <li>Code commenting</li>
+  <li>Drawing diagrams</li>
+</ul>
