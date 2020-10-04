@@ -1,37 +1,98 @@
-<h1>Distributed Systems: Project 2 (Distributed File System)</h1>
+# Distributed Systems: Project 2 (Distributed File System)
 
-Students: <b>Trang Nguyen (BS18-DS-01)</b> and <b>Marko Pezer (BS18-SE-01)</b><br>
-Date: <b>October 2020</b><br>
+Students: **Trang Nguyen (BS18-DS-01)** and **Marko Pezer (BS18-SE-01)**
+
+Date: **October 2020**
 
 This project is created for Distributed Systems course at Innopolis University, Russia.
 
-<h2>System launching and using</h2>
+![Demo](diagrams/demo.gif)
+
+## System launching and using
+
+Download source code using
+
+```bash
+git clone https://github.com/tracy2811/dfs.git
+```
+
+or use public docker image [tracy2811/dfs:base](https://hub.docker.com/repository/docker/tracy2811/dfs)
+
+### 1. Launching naming server
+
+Start naming server by running `naming.py` with `NAMING_PORT_NUMBER` as argument
+
+```bash
+# From source code
+python naming.py PORT_NUMBER
+
+# Or from Docker image
+docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT_NUMBER
+```
 
 
-<h2>Architectural diagrams</h2>
+### 2. Launching storage servers
+
+Multiple storage servers can join to the DFS network. To start each of them, running `storage.py` with 3 arguments, i.e., `NAMING_ADDR`, `NAMING_PORT_NUMBER`, and `STORAGE_PORT_NUMBER` respectively.
+
+```bash
+# From source code
+python storage.py NAMING_ADDR NAMING_PORT_NUMBER STORAGE_PORT_NUMBER
+
+# Or from Docker image
+docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMING_PORT_NUMBER STORAGE_PORT_NUMBER
+```
+
+### 3. Client usage
+
+`client.py` provides an interactive shell for user to take actions on the DFS. It requires 2 arguments, i.e., `SERVER_ADDR`, and `SERVER_PORT_NUMBER` respectively. For new system, `init` action is required. Client at any time can execute this `init` action to format the system.
+
+```bash
+# From source code
+python client.py NAMING_ADDR NAMING_PORT_NUMBER
+
+# Or from Docker image
+docker run --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT_NUMBER
+```
+
+The table below shows command supported by the current client shell.
+
+Command | Description
+--- | ---
+`init` | Initialize client storage on the new system. Can be used to format the system.
+`touch file` | Create a new empty file
+`get file` | Download a file from DFS to client side
+`put local_file file` | Upload file from client side local_file to DFS
+`info file` | Get file's information, i.e., mode, size, and modification time
+`cp src_file dst_file` | Create a copy of a file src_file under name dst_file
+`mv src_file dst` | Move a file from src_file to dst. Can be used to rename a file
+`rm target` | Delete a file or directory
+`cd dir` | Change current working directory
+`ls dir  | List files and directories
+`mkdir dir` | Make a directory
+`help` | Show help
+`exit` | Quit interactive shell
+
+## Architectural diagrams
 
 ![Diagram_01](diagrams/diagram_01.JPG)
 
-<h2>Description of communication protocols</h2>
+## Description of communication protocols
 
+TCP IPv4 is used.
 
-<h2>Contribution of each team member</h2>
+## Contribution of each team member
 
-During the working process we were helping each other in every part of the process.<br>
-However, there is a rough distribution of the jobs.
+During the working process we were helping each other in every part of the process. However, there is a rough distribution of the jobs.
 
-<h4>Trang Nguyen (BS18-DS-01):</h4>
+### Trang Nguyen (BS18-DS-01):
 
-<ul>
-  <li>General ideas</li>
-  <li>Python coding</li>
-  <li>Docker</li>
-</ul>
+- General ideas
+- Python coding
+- Docker
 
-<h4>Marko Pezer (BS18-SE-01):</h4>
+### Marko Pezer (BS18-SE-01):
 
-<ul>
-  <li>General ideas</li>
-  <li>Documentation and comments</li>
-  <li>Drawing diagrams</li>
-</ul>
+- General ideas
+- Documentation and comments
+- Drawing diagrams
