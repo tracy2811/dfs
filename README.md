@@ -17,6 +17,9 @@ This project is created for Distributed Systems course at Innopolis University, 
 
 <h2>Contribution of each team member</h2>
 
+During the working process we were helping each other in every part of the process.<br>
+However, there is a rough distribution of the jobs.
+
 <h4>Trang Nguyen (BS18-DS-01):</h4>
 
 <ul>
@@ -25,14 +28,10 @@ This project is created for Distributed Systems course at Innopolis University, 
   <li>Docker</li>
 </ul>
 
-
 <h4>Marko Pezer (BS18-SE-01):</h4>
 
 <ul>
   <li>General ideas</li>
-  <li>Documentation</li>
-  <li>Code commenting</li>
+  <li>Documentation and comments</li>
   <li>Drawing diagrams</li>
 </ul>
-
-However, during the working process we were helping each other in every part of the process.
