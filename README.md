@@ -15,3 +15,7 @@ Semester: <b>F20</b><br>
 
 
 <h2>Contribution of each team member</h2>
+
+<h4>Trang Nguyen (BS18-DS-01):</h4>
+
+<h4>Marko Pezer (BS18-SE-01):</h4>
