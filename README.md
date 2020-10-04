@@ -10,7 +10,7 @@ This project is created for Distributed Systems course at Innopolis University, 
 
 ## System launching and using
 
-Download source code using
+To download source code use
 
 ```bash
 git clone https://github.com/tracy2811/dfs.git
@@ -29,7 +29,6 @@ python naming.py PORT_NUMBER
 # Or from Docker image
 docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT_NUMBER
 ```
-
 
 ### 2. Launching storage servers
 
