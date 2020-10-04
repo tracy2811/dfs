@@ -1,8 +1,9 @@
 <h1>Distributed Systems: Project 2 (Distributed File System)</h1>
 
 Students: <b>Trang Nguyen (BS18-DS-01)</b> and <b>Marko Pezer (BS18-SE-01)</b><br>
-Semester: <b>F20</b><br>
+Date: <b>October 2020</b><br>
 
+This project is created for Distributed Systems course at Innopolis University.
 
 <h2>System launching and using</h2>
 
