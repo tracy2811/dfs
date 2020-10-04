@@ -40,8 +40,8 @@ def create_file(server, port, rel_path):
         server, port = storage.split(' ')
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
           st.connect((server, int(port)))
-          message = 'touch ' + message['uuid']
-          st.send(message.encode())
+          msg = 'touch ' + message['uuid']
+          st.send(msg.encode())
       return True
   return False
 
@@ -55,8 +55,8 @@ def read_file(server, port, rel_path):
       server, port = message['storage'].split(' ')
       with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
         st.connect((server, int(port)))
-        message = 'get ' + message['uuid']
-        st.send(message.encode())
+        msg = 'get ' + message['uuid']
+        st.send(msg.encode())
         with open(os.path.basename(rel_path), 'wb') as fs:
           while True:
             data = st.recv(1024)
@@ -77,8 +77,8 @@ def write_file(server, port, local_path, rel_path):
         server, port = storage.split(' ')
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
           st.connect((server, int(port)))
-          message = 'put ' + message['uuid']
-          st.send(message.encode())
+          msg = 'put ' + message['uuid']
+          st.send(msg.encode())
           st.recv(1024)
           with open(local_path, 'rb') as fs:
             while True:
@@ -142,8 +142,8 @@ def copy_file(server, port, src_rel_path, dst_rel_path):
         server, port = storage.split(' ')
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
           st.connect((server, int(port)))
-          message = 'cp ' + src_uuid + ' ' + dst_uuid
-          st.send(message.encode())
+          msg = 'cp ' + src_uuid + ' ' + dst_uuid
+          st.send(msg.encode())
       return True
   return False
 
