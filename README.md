@@ -20,14 +20,19 @@ This project is created for Distributed Systems course at Innopolis University, 
 <h4>Trang Nguyen (BS18-DS-01):</h4>
 
 <ul>
-  <li>Coding</li>
+  <li>General ideas</li>
+  <li>Python coding</li>
+  <li>Docker</li>
 </ul>
 
 
 <h4>Marko Pezer (BS18-SE-01):</h4>
 
 <ul>
+  <li>General ideas</li>
   <li>Documentation</li>
   <li>Code commenting</li>
   <li>Drawing diagrams</li>
 </ul>
+
+However, during the working process we were helping each other in every part of the process.
