@@ -51,8 +51,42 @@ class ClientListener(Thread):
       shutil.copyfile(src, dst)
     self.sock.close()
 
-def down(s):
-  s.send('down'.encode())
+def up(server, server_port, port):
+  with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((server, server_port))
+    message = 'up ' + str(port)
+    s.send(message.encode())
+    # message = ''
+    # while True:
+    #   m = s.recv(1024).decode()
+    #   if not m:
+    #     break
+    #   message += m
+    # message = json.loads(message)
+    # if message['ok'] and message['storage']:
+    #   if os.path.exists(STORAGE):
+    #     shutil.rmtree(STORAGE)
+    #   os.mkdir(STORAGE)
+    #   print('hi')
+    #   for uuid in message['uuids']:
+    #     server, port = message['storage'].split(' ')
+    #     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
+    #       st.connect((server, int(port)))
+    #       msg = 'get ' + uuid
+    #       st.send(msg.encode())
+    #       with open(uuid, 'wb') as fs:
+    #         while True:
+    #           data = st.recv(1024)
+    #           if not data:
+    #             break
+    #           fs.write(data)
+    # s.send('ok'.encode())
+
+def down(server, server_port, port):
+  with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((server, server_port))
+    message = 'down ' + str(port)
+    s.send(message.encode())
 
 def main():
   if len(sys.argv) != 4:
@@ -65,28 +99,23 @@ def main():
   except:
     print('port must be an integer')
     sys.exit(1)
-  with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((server, server_port))
-    message = 'up ' + str(port)
-    s.send(message.encode())
-    atexit.register(down, s)
+  atexit.register(down, server, server_port, port)
+  up(server, server_port, port)
 
-    # AF_INET – IPv4, SOCK_STREAM – TCP
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # reuse address; in OS address will be reserved after app closed for a while
-    # so if we close and imidiatly start server again – we'll get error
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    # listen to all interfaces at port
-    sock.bind(('', port))
-    sock.listen()
-    print('Listening on port', port)
-    while True:
-        # blocking call, waiting for new client to connect
-        con, addr = sock.accept()
-        # start new thread to deal with client
-        ClientListener(con).start()
-    
-    s.send('down'.encode())
+  # AF_INET – IPv4, SOCK_STREAM – TCP
+  sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  # reuse address; in OS address will be reserved after app closed for a while
+  # so if we close and imidiatly start server again – we'll get error
+  sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+  # listen to all interfaces at port
+  sock.bind(('', port))
+  sock.listen()
+  print('Listening on port', port)
+  while True:
+    # blocking call, waiting for new client to connect
+    con, addr = sock.accept()
+    # start new thread to deal with client
+    ClientListener(con).start()
 
 if __name__ == "__main__":
     main()
