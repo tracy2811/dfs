@@ -67,7 +67,7 @@ Command | Description
 `mv src_file dst` | Move a file from src_file to dst. Can be used to rename a file
 `rm target` | Delete a file or directory
 `cd dir` | Change current working directory
-`ls dir  | List files and directories
+`ls dir`  | List files and directories
 `mkdir dir` | Make a directory
 `help` | Show help
 `exit` | Quit interactive shell
