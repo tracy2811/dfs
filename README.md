@@ -23,41 +23,41 @@ NOTE: For rich and latest features, please use code from [latest](https://github
 
 ### 1. Launching naming server
 
-Start naming server by running `naming.py` with `NAMING_PORT_NUMBER` as argument
+Start naming server by running `naming.py` with `NAMING_PORT` as argument
 
 ```bash
 # From source code
-python naming.py PORT_NUMBER
+python naming.py PORT
 
 # Or from Docker image
-docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT_NUMBER
+docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT
 ```
 
 ### 2. Launching storage servers
 
-Multiple storage servers can join to the DFS network. To start each of them, running `storage.py` with 3 arguments, i.e., `NAMING_ADDR`, `NAMING_PORT_NUMBER`, and `STORAGE_PORT_NUMBER` respectively.
+Multiple storage servers can join to the DFS network. To start each of them, running `storage.py` with 3 arguments, i.e., `NAMING_ADDR`, `NAMING_PORT`, and `STORAGE_PORT` respectively.
 
 ```bash
 # From source code
-python storage.py NAMING_ADDR NAMING_PORT_NUMBER STORAGE_PORT_NUMBER
+python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 
 # Or from Docker image
-docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMING_PORT_NUMBER STORAGE_PORT_NUMBER
+docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 ```
 
 ### 3. Client usage
 
-`client.py` provides an interactive shell for user to take actions on the DFS. It requires 2 arguments, i.e., `SERVER_ADDR`, and `SERVER_PORT_NUMBER` respectively. For new system, `init` action is required. Client at any time can execute this `init` action to format the system.
+`client.py` provides an interactive shell for user to take actions on the DFS. It requires 2 arguments, i.e., `SERVER_ADDR`, and `SERVER_PORT` respectively. For new system, `init` action is required. Client at any time can execute this `init` action to format the system.
 
 ```bash
 # From source code
-python client.py NAMING_ADDR NAMING_PORT_NUMBER
+python client.py NAMING_ADDR NAMING_PORT
 
 # Or from Docker image
-docker run --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT_NUMBER
+docker run --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT
 ```
 
-The table below shows command supported by the current client shell.
+The table below shows command supported by the current client shell. For more flexible experience, please refer to [latest](https://github.com/tracy2811/dfs/tree/latest) branch.
 
 Command | Description
 --- | ---
