@@ -54,7 +54,7 @@ docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMIN
 python client.py NAMING_ADDR NAMING_PORT
 
 # Or from Docker image
-docker run --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT
+docker run -it --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT
 ```
 
 The table below shows command supported by the current client shell. For more flexible experience, please refer to [latest](https://github.com/tracy2811/dfs/tree/latest) branch.
