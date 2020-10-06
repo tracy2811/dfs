@@ -94,7 +94,7 @@ class ClientListener(Thread):
     dir = os.path.dirname(dst)
     if len(storages) > 0 and (dir == '/' or (dir in dirs)):
       id = str(uuid.uuid4())
-      if dst in dirs:
+      if dst == '/' or dst in dirs:
         f = os.path.join(dst, src)
         files[f] = id
       else:
