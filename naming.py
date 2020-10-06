@@ -17,17 +17,17 @@ class ClientListener(Thread):
     global storages, dirs, files
     self.port = port
     storage = self.addr + ' ' + self.port
-    # uuids = [files[f] for f in files]
-    # message = {
-    #   'ok': True,
-    #   'uuids': uuids,
-    #   'storage': storages[0] if storages else None,
-    # }
-    # self.sock.sendall(json.dumps(message).encode())
-    # status = self.sock.recv(1024).decode()
-    # if status == 'ok' and storage not in storages:
-    storages.append(storage)
-    print('Storage', storage, 'up')
+    uuids = [files[f] for f in files]
+    message = {
+      'ok': True,
+      'uuids': uuids,
+      'storage': storages[0] if storages else None
+    }
+    self.sock.sendall(json.dumps(message).encode())
+    status = self.sock.recv(1024).decode()
+    if status == 'ok' and storage not in storages:
+      storages.append(storage)
+      print('Storage', storage, 'up')
 
   def _down(self, port):
     global storages, dirs, files
@@ -112,8 +112,13 @@ class ClientListener(Thread):
     global storages, dirs, files
     if len(storages) > 0:
       if path in files:
-        self.sock.send('ok'.encode())
+        message = {
+          'ok': True,
+          'storages': storages,
+          'uuid': files[path]
+        }
         files.pop(path, None)
+        self.sock.sendall(json.dumps(message).encode())
       elif path == '/' or path in dirs:
         subdirs = []
         subfiles = []
@@ -126,14 +131,14 @@ class ClientListener(Thread):
             subfiles.append(f)
             uuids.append(files[f])
         if len(subdirs) > 0 or len(subfiles) > 0:
-          self.sock.send('confirm'.encode())
+          message = {
+            'ok': True,
+            'storages': storages,
+            'uuids': uuids
+          }
+          self.sock.sendall(json.dumps(message).encode())
           confirm = self.sock.recv(1024).decode()
           if confirm == 'y':
-            message = {
-              'storages': storages,
-              'uuids': uuids
-            }
-            self.sock.sendall(json.dumps(message).encode())
             for f in subfiles:
               files.pop(f, None)
             for d in subdirs:
@@ -141,18 +146,34 @@ class ClientListener(Thread):
             dirs.remove(path)
         else:
           dirs.remove(path)
-          self.sock.send('ok'.encode())
+          message = {
+            'ok': True,
+          }
+          self.sock.sendall(json.dumps(message).encode())
       else:
-        self.sock.send('failed'.encode())
+          message = {
+            'ok': False,
+            'detail': 'No storage, file or directory'
+          }
+          self.sock.sendall(json.dumps(message).encode())
     else:
-      self.sock.send('failed'.encode())
+      message = {
+        'ok': False,
+        'detail': 'No storage, file or directory'
+      }
+      self.sock.sendall(json.dumps(message).encode())
 
   def _cp(self, src, dst):
     global storages, dirs, files
     dir = os.path.dirname(dst)
-    if len(storages) > 0 and src in files and (dir == '/' or (dir in dirs)):
-      id = str(uuid.uuid4())
-      files[dst] =  id
+    dst_is_file = dir == '/' or (dir in dirs)
+    dst_is_dir = dst == '/' or (dst in dirs)
+    id = str(uuid.uuid4())
+    if len(storages) > 0 and src in files and (dst_is_dir or dst_is_file):
+      if dst_is_dir:
+        files[os.path.normpath(os.path.join(dst, os.path.basename(src)))] = id
+      else:
+        files[dst] =  id
       message = {
         'ok': True,
         'uuids': [files[src], id],

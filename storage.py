@@ -32,17 +32,21 @@ class ClientListener(Thread):
       message = {
         'size': info.st_size,
         'mode': stat.filemode(info.st_mode),
-        'mtime': datetime.fromtimestamp(info.st_mtime).strftime("%m/%d/%Y %H:%M:%S")
+        'mtime': datetime.fromtimestamp(info.st_mtime).strftime("%m-%d-%Y %H:%M:%S")
       }
       self.sock.sendall(json.dumps(message).encode())
     elif command[0] == 'put':
       self.sock.send('ok'.encode())
       with open(STORAGE + '/' + command[1], 'wb') as fs:
+        self.sock.settimeout(10)
         while True:
-          data = self.sock.recv(1024)
-          if not data:
-            break
-          fs.write(data)
+            try:
+              data = self.sock.recv(1024)
+              if not data:
+                break
+              fs.write(data)
+            except:
+              break
     elif command[0] == 'rm':
       os.remove(STORAGE + '/' + command[1])
     elif command[0] == 'cp':
@@ -51,36 +55,48 @@ class ClientListener(Thread):
       shutil.copyfile(src, dst)
     self.sock.close()
 
+def get_message(sock):
+  message = ''
+  sock.settimeout(3)
+  while True:
+    try:
+      m = sock.recv(1024).decode()
+      if not m:
+        break
+      message += m
+    except:
+      break
+  message = json.loads(message)
+  return message
+
 def up(server, server_port, port):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, server_port))
     message = 'up ' + str(port)
     s.send(message.encode())
-    # message = ''
-    # while True:
-    #   m = s.recv(1024).decode()
-    #   if not m:
-    #     break
-    #   message += m
-    # message = json.loads(message)
-    # if message['ok'] and message['storage']:
-    #   if os.path.exists(STORAGE):
-    #     shutil.rmtree(STORAGE)
-    #   os.mkdir(STORAGE)
-    #   print('hi')
-    #   for uuid in message['uuids']:
-    #     server, port = message['storage'].split(' ')
-    #     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
-    #       st.connect((server, int(port)))
-    #       msg = 'get ' + uuid
-    #       st.send(msg.encode())
-    #       with open(uuid, 'wb') as fs:
-    #         while True:
-    #           data = st.recv(1024)
-    #           if not data:
-    #             break
-    #           fs.write(data)
-    # s.send('ok'.encode())
+    message = get_message(s)
+    if message['ok'] and message['storage']:
+      print(message)
+      if os.path.exists(STORAGE):
+        shutil.rmtree(STORAGE)
+      os.mkdir(STORAGE)
+      for uuid in message['uuids']:
+        server, port = message['storage'].split(' ')
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
+          st.connect((server, int(port)))
+          msg = 'get ' + uuid
+          st.send(msg.encode())
+          with open(STORAGE + '/' + uuid, 'wb') as fs:
+            while True:
+              st.settimeout(3)
+              try:
+                data = st.recv(1024)
+                if not data:
+                  break
+                fs.write(data)
+              except:
+                break
+    s.send('ok'.encode())
 
 def down(server, server_port, port):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
