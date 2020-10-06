@@ -18,6 +18,9 @@ git clone https://github.com/tracy2811/dfs.git
 
 or use public docker image [tracy2811/dfs:base](https://hub.docker.com/repository/docker/tracy2811/dfs)
 
+NOTE: For rich and latest features, please use code from [latest](https://github.com/tracy2811/dfs/tree/latest) branch or docker image [tracy2811/dfs:latest](https://hub.docker.com/repository/docker/tracy2811/dfs). Documentation can also be found there.
+
+
 ### 1. Launching naming server
 
 Start naming server by running `naming.py` with `NAMING_PORT_NUMBER` as argument
