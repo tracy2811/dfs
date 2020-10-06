@@ -94,7 +94,7 @@ def write_file(server, port, local_path, rel_path):
               if not data:
                 break
               st.send(data)
-            return True
+      return True
   return False
 
 def delete(server, port, rel_path):

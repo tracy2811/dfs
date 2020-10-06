@@ -38,7 +38,7 @@ class ClientListener(Thread):
     elif command[0] == 'put':
       self.sock.send('ok'.encode())
       with open(STORAGE + '/' + command[1], 'wb') as fs:
-        self.sock.settimeout(10)
+        self.sock.settimeout(3)
         while True:
             try:
               data = self.sock.recv(1024)
