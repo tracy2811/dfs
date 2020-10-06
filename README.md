@@ -44,7 +44,7 @@ docker run --network=host tracy2811/dfs:latest python storage.py NAMING_ADDR NAM
 
 ### 3. Client usage
 
-`client.py` provides an interactive shell for user to take actions on the DFS. It requires 2 arguments, i.e., `SERVER_ADDR`, and `SERVER_PORT` respectively. For new system, `init` action is required. Client at any time can execute this `init` action to format the system.
+`client.py` provides an interactive shell for user to take actions on the DFS. It requires 2 arguments, i.e., `SERVER_ADDR`, and `SERVER_PORT` respectively. For new system, `init` action is recommended. Client at any time can execute this `init` action to format the system.
 
 ```bash
 # From source code

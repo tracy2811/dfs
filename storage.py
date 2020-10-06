@@ -75,10 +75,10 @@ def up(server, server_port, port):
     message = 'up ' + str(port)
     s.send(message.encode())
     message = get_message(s)
+    if os.path.exists(STORAGE):
+      shutil.rmtree(STORAGE)
+    os.mkdir(STORAGE)
     if message['ok'] and message['storage']:
-      if os.path.exists(STORAGE):
-        shutil.rmtree(STORAGE)
-      os.mkdir(STORAGE)
       for uuid in message['uuids']:
         server, port = message['storage'].split(' ')
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as st:
