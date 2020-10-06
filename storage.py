@@ -76,7 +76,6 @@ def up(server, server_port, port):
     s.send(message.encode())
     message = get_message(s)
     if message['ok'] and message['storage']:
-      print(message)
       if os.path.exists(STORAGE):
         shutil.rmtree(STORAGE)
       os.mkdir(STORAGE)

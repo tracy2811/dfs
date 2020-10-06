@@ -57,7 +57,7 @@ class ClientListener(Thread):
   def _touch(self, path):
     global storages, dirs, files
     dir = os.path.dirname(path)
-    if len(storages) and (dir == '/' or (dir in dirs)):
+    if len(storages) and path not in dirs and (dir == '/' or (dir in dirs)):
       id = str(uuid.uuid4())
       files[path] =  id
       message = {
@@ -89,12 +89,16 @@ class ClientListener(Thread):
       }
       self.sock.sendall(json.dumps(message).encode())
   
-  def _put(self, path):
+  def _put(self, src, dst):
     global storages, dirs, files
-    dir = os.path.dirname(path)
+    dir = os.path.dirname(dst)
     if len(storages) > 0 and (dir == '/' or (dir in dirs)):
       id = str(uuid.uuid4())
-      files[path] = id
+      if dst in dirs:
+        f = os.path.join(dst, src)
+        files[f] = id
+      else:
+        files[dst] = id
       message = {
         'ok': True,
         'uuid': id,
@@ -254,7 +258,7 @@ class ClientListener(Thread):
     elif command[0] == 'get' or command[0] == 'info':
       self._get_or_info(command[1])
     elif command[0] == 'put':
-      self._put(command[1])
+      self._put(command[1], command[2])
     elif command[0] == 'rm':
       self._rm(command[1])
     elif command[0] == 'cp':

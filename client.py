@@ -77,7 +77,7 @@ def read_file(server, port, rel_path):
 def write_file(server, port, local_path, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
-    message = 'put ' + rel_path
+    message = 'put ' + os.path.basename(local_path) + ' ' + rel_path
     s.send(message.encode())
     message = get_message(s)
     if message['ok']:
@@ -105,7 +105,7 @@ def delete(server, port, rel_path):
     message = get_message(s)
     if message['ok']:
       if 'uuids' in message:
-        confirm = input('Are you sure (y/n)? ')
+        confirm = input('%s not empty. Are you sure (y/n)? ' % (rel_path))
         if confirm == 'y' or confirm == 'yes':
           s.send('y'.encode())
           for uuid in message['uuids']:
@@ -253,7 +253,7 @@ def main():
   greeting()
 
   while True:
-    command = input('client:%s$ ' % home).split()
+    command = input('\033[92mclient\033[0m:\033[94m%s\033[0m$ ' % home).split()
     if (len(command)) == 0:
       continue
     if command[0] == 'help':
@@ -297,7 +297,7 @@ def main():
           if not write_file(server, port, command[1], dst_rel_path):
             print('Failed to upload', command[1])
           else:
-            print(command[1], 'uploaded as', command[2])
+            print(command[1], 'uploaded')
     elif command[0] == 'rm':
       if len(command) < 2:
         print('Usage: rm files... | directories...')
