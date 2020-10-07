@@ -1,5 +1,9 @@
+# client.py
+
+# Import libraries
 import sys, os, socket, json
 
+# Get message
 def get_message(sock):
   message = ''
   while True:
@@ -10,6 +14,7 @@ def get_message(sock):
   message = json.loads(message)
   return message
 
+# Client Initialization
 def init(server, port):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -29,6 +34,7 @@ def init(server, port):
       return True
   return False
 
+# Create file
 def create_file(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -45,6 +51,7 @@ def create_file(server, port, rel_path):
       return True
   return False
 
+# Read file
 def read_file(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -66,6 +73,7 @@ def read_file(server, port, rel_path):
           return True
   return False
 
+# Write file
 def write_file(server, port, local_path, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -89,6 +97,7 @@ def write_file(server, port, local_path, rel_path):
             return True
   return False
 
+# Delete file
 def delete(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -113,6 +122,7 @@ def delete(server, port, rel_path):
       return False
   return False
 
+# Get information about file
 def get_file_info(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -130,6 +140,7 @@ def get_file_info(server, port, rel_path):
         return True
   return False
 
+# Copy file
 def copy_file(server, port, src_rel_path, dst_rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -147,6 +158,7 @@ def copy_file(server, port, src_rel_path, dst_rel_path):
       return True
   return False
 
+# Move file
 def move_file(server, port, src_rel_path, dst_rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -157,9 +169,11 @@ def move_file(server, port, src_rel_path, dst_rel_path):
       return True
   return False
 
+# Get path
 def get_path(root, new):
   return os.path.normpath(os.path.join(root, new))
 
+# Open directory
 def open_dir(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -170,6 +184,7 @@ def open_dir(server, port, rel_path):
       return True
   return False
 
+# Read directory
 def read_dir(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -184,6 +199,7 @@ def read_dir(server, port, rel_path):
       return True
   return False
 
+# Make new directory
 def make_dir(server, port, rel_path):
   with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((server, port))
@@ -194,6 +210,7 @@ def make_dir(server, port, rel_path):
       return True
   return False
 
+# Create help command for client
 def help():
   print("""
   Initialize:
@@ -216,6 +233,7 @@ def help():
       exit
   """)
 
+# Main method
 def main():
   if len(sys.argv) != 3:
     print('Usage:', sys.argv[0], 'server port')
