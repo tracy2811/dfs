@@ -16,7 +16,7 @@ To download source code from this branch use:
 git clone -b latest https://github.com/tracy2811/dfs.git
 ```
 
-or use latest public docker image [tracy2811/dfs:latest](https://hub.docker.com/repository/docker/tracy2811/dfs)
+or use latest public docker image [tracy2811/dfs:latest](https://hub.docker.com/r/tracy2811/dfs)
 
 ### 1. Launching naming server
 
