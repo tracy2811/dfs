@@ -1,4 +1,6 @@
-# naming server
+# naming.py
+
+# Import libraries
 import socket, os, uuid, sys, json
 from threading import Thread
 
@@ -213,6 +215,7 @@ class ClientListener(Thread):
         self.sock.close()
         break
 
+# Main method
 def main():
   if len(sys.argv) != 2:
     print('Usage:', sys.argv[0], 'port')
