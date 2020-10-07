@@ -26,7 +26,7 @@ To start the naming server run `naming.py` with `NAMING_PORT` as an argument:
 # From source code
 python naming.py PORT
 
-# Or from Docker image
+# From Docker image
 docker run --network=host tracy2811/dfs:latest python naming.py NAMING_PORT
 ```
 
@@ -39,7 +39,7 @@ To start any of them, run `storage.py` with three arguments (`NAMING_ADDR`, `NAM
 # From source code
 python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 
-# Or from Docker image
+# From Docker image
 docker run --network=host tracy2811/dfs:latest python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 ```
 
@@ -52,7 +52,7 @@ For the new system, `init` action is required. Client at any time can execute th
 # From source code
 python client.py NAMING_ADDR NAMING_PORT
 
-# Or from Docker image
+# From Docker image
 docker run -it --network=host tracy2811/dfs:latest python client.py NAMING_ADDR NAMING_PORT
 ```
 
