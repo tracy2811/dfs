@@ -16,9 +16,9 @@ To download source code use
 git clone https://github.com/tracy2811/dfs.git
 ```
 
-or use public docker image [tracy2811/dfs:base](https://hub.docker.com/r/tracy2811/dfs)
+or use public docker image [tracy2811/dfs:base](https://hub.docker.com/repository/docker/tracy2811/dfs)
 
-**NOTE:** For rich and latest features, please use code from [latest](https://github.com/tracy2811/dfs/tree/latest) branch or docker image [tracy2811/dfs:latest](https://hub.docker.com/r/tracy2811/dfs). Documentation can also be found there.
+**NOTE:** For rich and latest features, please use code from [latest](https://github.com/tracy2811/dfs/tree/latest) branch or docker image [tracy2811/dfs:latest](https://hub.docker.com/repository/docker/tracy2811/dfs). Documentation can also be found there.
 
 
 ### 1. Launching naming server
@@ -81,7 +81,9 @@ Command | Description
 
 ## Description of communication protocols
 
-TCP IPv4 is used.
+TCP/IPv4 is used.
+
+TCP/IPv4 protocol works at the Network layer of the OSI model and at the Internet layer of the TCP/IP model. Thus, this protocol identifies hosts based upon their logical addresses (IP addresses).
 
 ## Contribution of each team member
 
