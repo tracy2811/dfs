@@ -83,9 +83,9 @@ Command | Description
 
 ## Description of communication protocols
 
-TCP/IPv4 is used.
+TCP IPv4 is used.
 
-TCP/IPv4 protocol works at the Network layer of the OSI model and at the Internet layer of the TCP/IP model. Thus, this protocol identifies hosts based upon their logical addresses (IP addresses).
+TCP IPv4 protocol works at the Network layer of the OSI model and at the Internet layer of the TCP/IP model. Thus, this protocol identifies hosts based upon their logical addresses (IP addresses).
 
 ## Contribution of each team member
 
