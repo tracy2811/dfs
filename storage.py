@@ -1,3 +1,6 @@
+# storage.py
+
+# Import libraries
 import socket,  os, shutil, stat, atexit, sys, json
 from datetime import datetime
 from threading import Thread
@@ -54,6 +57,7 @@ class ClientListener(Thread):
 def down(s):
   s.send('down'.encode())
 
+# Main method
 def main():
   if len(sys.argv) != 4:
     print('Usage:', sys.argv[0], 'server server_port storage_port')
