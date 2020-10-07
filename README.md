@@ -96,5 +96,6 @@ During the working process we were helping each other in every part of the proce
 ### Marko Pezer (BS18-SE-01):
 
 - General ideas
+- AWS instances
 - Documentation and comments
 - Drawing diagrams
