@@ -27,7 +27,7 @@ To start the naming server run `naming.py` with `NAMING_PORT` as an argument:
 
 ```bash
 # From source code
-python naming.py PORT
+python naming.py NAMING_PORT
 
 # From Docker image
 docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT
