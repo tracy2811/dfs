@@ -1,3 +1,6 @@
+# storage.py
+
+# Import libraries
 import socket,  os, shutil, stat, atexit, sys, json
 from datetime import datetime
 from threading import Thread
@@ -103,6 +106,7 @@ def down(server, server_port, port):
     message = 'down ' + str(port)
     s.send(message.encode())
 
+# Main method
 def main():
   if len(sys.argv) != 4:
     print('Usage:', sys.argv[0], 'server server_port storage_port')
@@ -119,10 +123,10 @@ def main():
 
   # AF_INET – IPv4, SOCK_STREAM – TCP
   sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  # reuse address; in OS address will be reserved after app closed for a while
-  # so if we close and imidiatly start server again – we'll get error
+  # Reuse address; in OS address will be reserved after app closed for a while
+  # So if we close and imidiatly start server again – we'll get error
   sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-  # listen to all interfaces at port
+  # Listen to all interfaces at port
   sock.bind(('', port))
   sock.listen()
   print('Listening on port', port)
