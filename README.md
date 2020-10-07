@@ -29,7 +29,7 @@ Start naming server by running `naming.py` with `NAMING_PORT` as argument
 # From source code
 python naming.py PORT
 
-# Or from Docker image
+# From Docker image
 docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT
 ```
 
@@ -41,7 +41,7 @@ Multiple storage servers can join to the DFS network. To start each of them, run
 # From source code
 python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 
-# Or from Docker image
+# From Docker image
 docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 ```
 
@@ -53,7 +53,7 @@ docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMIN
 # From source code
 python client.py NAMING_ADDR NAMING_PORT
 
-# Or from Docker image
+# From Docker image
 docker run -it --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT
 ```
 
@@ -61,19 +61,19 @@ The table below shows command supported by the current client shell. For more fl
 
 Command | Description
 --- | ---
-`init` | Initialize client storage on the new system. Can be used to format the system.
-`touch file` | Create a new empty file
-`get file` | Download a file from DFS to client side
-`put local_file file` | Upload file from client side local_file to DFS
-`info file` | Get file's information, i.e., mode, size, and modification time
-`cp src_file dst_file` | Create a copy of a file src_file under name dst_file
-`mv src_file dst` | Move a file from src_file to dst. Can be used to rename a file
-`rm target` | Delete a file or directory
-`cd dir` | Change current working directory
-`ls dir`  | List files and directories
-`mkdir dir` | Make a directory
-`help` | Show help
-`exit` | Quit interactive shell
+`init` | Initialize the client storage on the new system. Can be used to format the system.
+`touch file` | Create a new empty file.
+`get file` | Download a file from DFS to the client side.
+`put local_file file` | Upload file from the client side local_file to DFS.
+`info file` | Get file's information (mode, size, and modification time).
+`cp src_file dst_file` | Create a copy of a file src_file under the name dst_file.
+`mv src_file dst` | Move a file from src_file to dst. Can be used to rename a file.
+`rm target` | Delete a file or a directory.
+`cd dir` | Change current working directory.
+`ls dir`  | List files and directories.
+`mkdir dir` | Make a directory.
+`help` | Show help.
+`exit` | Quit interactive shell.
 
 ## Architectural diagrams
 
