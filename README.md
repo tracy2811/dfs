@@ -18,6 +18,7 @@ git clone -b latest https://github.com/tracy2811/dfs.git
 
 or use latest public docker image [tracy2811/dfs:latest](https://hub.docker.com/r/tracy2811/dfs)
 
+
 ### 1. Launching naming server
 
 To start the naming server run `naming.py` with `NAMING_PORT` as an argument:
@@ -86,8 +87,6 @@ TCP IPv4 protocol works at the Network layer of the OSI model and at the Interne
 
 ## Contribution of each team member
 
-During the working process we were helping each other in every part of the process. 
-
-However, here is the graph that shows contribution of each team member.
+During the working process we were helping each other in every part of the process. Following graph shows contribution of each team member.
 
 ![Diagram_02](diagrams/diagram_02.JPG)
