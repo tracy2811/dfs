@@ -6,19 +6,17 @@ Date: **October 2020**
 
 This project is created for Distributed Systems course at Innopolis University, Russia.
 
-![Demo](diagrams/demo.gif)
+![Demo](diagrams/demo-latest.gif)
 
 ## System launching and using
 
-To download source code use
+To download source code from this branch use:
 
 ```bash
-git clone https://github.com/tracy2811/dfs.git
+git clone -b latest https://github.com/tracy2811/dfs.git
 ```
 
-or use public docker image [tracy2811/dfs:base](https://hub.docker.com/repository/docker/tracy2811/dfs)
-
-**NOTE:** For rich and latest features, please use code from [latest](https://github.com/tracy2811/dfs/tree/latest) branch or docker image [tracy2811/dfs:latest](https://hub.docker.com/repository/docker/tracy2811/dfs). Documentation can also be found there.
+or use latest public docker image [tracy2811/dfs:latest](https://hub.docker.com/r/tracy2811/dfs)
 
 
 ### 1. Launching naming server
@@ -30,7 +28,7 @@ To start the naming server run `naming.py` with `NAMING_PORT` as an argument:
 python naming.py NAMING_PORT
 
 # From Docker image
-docker run --network=host tracy2811/dfs:base python naming.py NAMING_PORT
+docker run --network=host tracy2811/dfs:latest python naming.py NAMING_PORT
 ```
 
 ### 2. Launching storage servers
@@ -43,7 +41,7 @@ To start any of them, run `storage.py` with three arguments (`NAMING_ADDR`, `NAM
 python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 
 # From Docker image
-docker run --network=host tracy2811/dfs:base python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
+docker run --network=host tracy2811/dfs:latest python storage.py NAMING_ADDR NAMING_PORT STORAGE_PORT
 ```
 
 ### 3. Client usage
@@ -56,26 +54,26 @@ For the new system, `init` action is required. Client at any time can execute th
 python client.py NAMING_ADDR NAMING_PORT
 
 # From Docker image
-docker run -it --network=host tracy2811/dfs:base python client.py NAMING_ADDR NAMING_PORT
+docker run -it --network=host tracy2811/dfs:latest python client.py NAMING_ADDR NAMING_PORT
 ```
 
-The table below shows command supported by the current client shell. For more flexible experience, please refer to [latest](https://github.com/tracy2811/dfs/tree/latest) branch.
+The table below shows command supported by the current client shell.
 
 Command | Description
 --- | ---
-`init` | Initialize the client storage on the new system. Can be used to format the system.
-`touch file` | Create a new empty file.
-`get file` | Download a file from DFS to the client side.
-`put local_file file` | Upload file from the client side local_file to DFS.
-`info file` | Get file's information (mode, size, and modification time).
-`cp src_file dst_file` | Create a copy of a file src_file under the name dst_file.
-`mv src_file dst` | Move a file from src_file to dst. Can be used to rename a file.
-`rm target` | Delete a file or a directory.
-`cd dir` | Change current working directory.
-`ls dir`  | List files and directories.
-`mkdir dir` | Make a directory.
-`help` | Show help.
-`exit` | Quit interactive shell.
+`init` | Initialize client storage on the new system, can be used to format the system
+`touch files...` | Create new empty files
+`get file` | Download a file from DFS to client side
+`put src dst` | Upload file from client side to DFS
+`info file` | Get file's information, i.e., mode, size, and modification time
+`cp src dst` | Create a copy of a file src to dst
+`mv src dst` | Move a file from src to dst. Can be used to rename a file
+`rm targets...` | Delete files or directories
+`cd dir` | Change current working directory
+`ls dir`  | List files and directories
+`mkdir dirs...` | Make new directories
+`help` | Show help
+`exit` | Quit interactive shell
 
 ## Architectural diagrams
 
@@ -89,8 +87,6 @@ TCP IPv4 protocol works at the Network layer of the OSI model and at the Interne
 
 ## Contribution of each team member
 
-During the working process we were helping each other in every part of the process. 
-
-However, here is the graph that shows contribution of each team member.
+During the working process we were helping each other in every part of the process. Following graph shows contribution of each team member.
 
 ![Diagram_02](diagrams/diagram_02.JPG)
